@@ -1,0 +1,103 @@
+@import (reference) "../../variables.less";
+@import (reference) "../../node_modules/lesshat/build/lesshat.less";
+
+.component-slideshow {
+    border: 1px solid #ccc;
+    padding: 5px;
+    width: 512px; // should be inner width + 10
+	max-width: 100%;
+    position: relative;
+    height: 311px;
+    background: white;
+    margin-top: 30px;
+
+	.inner {
+		width: 500px;
+		max-width: 100%;
+		height: 300px;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.slide img{
+		width: 500px;
+		margin: 0 auto;
+		position: absolute;
+		opacity: 0;
+		z-index: 1;
+		max-width: 100%;
+		opacity: 0;
+	}
+
+	.slide.active img {
+		opacity: 1;
+		z-index: 2;
+		display: block;
+	}
+
+	/* ------------ TRANSITIONS */
+	.slide.fade img {
+		opacity: 0;
+	}
+
+	.slide.fade.active img {
+		opacity: 1;
+	}
+
+	.slide.flip img {
+		perspective: 1000;
+		transform: rotateY(-180deg);
+	}
+
+	.slide.flip.active img {
+		transform-style: preserve-3d;
+		transform: rotateY(0deg);
+	}
+
+	.slide img{
+		.transition(all 800ms ease-in);
+	}
+
+	/* ------------ END TRANSITIONS */
+
+	.arrows, .ctrl {
+		cursor: pointer;
+		display: flex;
+		position: absolute;
+		z-index: 3;
+		right: 5px;
+		top: 5px;
+	}
+
+	.ctrl {
+		left: 5px;
+	}
+
+	.inner:-webkit-full-screen .ctrl,
+	.inner:-moz-full-screen .ctrl,
+	.inner:-ms-fullscreen .ctrl,
+	.inner:fullscreen .ctrl{
+		display: none; //@todo find a better way to handle this
+		// support 'f' key press for close full screen.
+		// support clicking on fullscreen icon to close
+	}
+
+	.arrows span, .ctrl span {
+		background-color: rgba(0,0,0,.3);
+		display: block;
+		width: 20px;
+		text-align: center;
+		color: white;
+		text-indent: 100%;
+		overflow: hidden;
+		background-size: 50%;
+		background-repeat: no-repeat;
+		background-position: 5px;
+	}
+
+	.arrows span:hover, .ctrl span:hover {
+		background-color: black;
+	}
+
+
+}
